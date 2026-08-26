@@ -12448,6 +12448,9 @@ describe('Validators', () => {
         '2015-W53',
         '2020-W53-7',
         '2026-W53',
+        // weeks 01-52 exist in every ISO week-numbering year, long or short
+        '2020-W10',
+        '2020-W10-3',
       ],
       invalid: [
         '2010-02-30',
@@ -12461,6 +12464,9 @@ describe('Validators', () => {
         '2019-W53',
         '2021-W53-7',
         '2022-W53',
+        // 31 December 2017 is a Sunday, so the ISO remap of getUTCDay() 0 -> 7
+        // runs here; 2017 is still a short year, so week 53 does not exist.
+        '2017-W53',
       ],
     });
   });
