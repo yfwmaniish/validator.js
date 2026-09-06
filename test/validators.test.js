@@ -4860,6 +4860,23 @@ describe('Validators', () => {
     test({
       validator: 'isFloat',
       args: [{
+        locale: 'is-NOT-a-locale',
+      }],
+      valid: [
+        '123',
+        '123.123',
+        '-3.5e2',
+      ],
+      invalid: [
+        '3undefined5',
+        '123,123',
+        'foo',
+        '',
+      ],
+    });
+    test({
+      validator: 'isFloat',
+      args: [{
         min: undefined,
         max: undefined,
       }],
