@@ -4874,6 +4874,25 @@ describe('Validators', () => {
         '',
       ],
     });
+    // Inherited property names (e.g. __proto__, constructor) are not own keys of
+    // the decimal map, so they must fall back to the "." separator too.
+    for (const inheritedLocale of ['__proto__', 'constructor', 'toString', 'hasOwnProperty', 'valueOf']) {
+      test({
+        validator: 'isFloat',
+        args: [{ locale: inheritedLocale }],
+        valid: [
+          '123',
+          '123.123',
+          '-3.5e2',
+        ],
+        invalid: [
+          '123,123',
+          '3[object Object]5',
+          'foo',
+          '',
+        ],
+      });
+    }
     test({
       validator: 'isFloat',
       args: [{
